@@ -1,0 +1,7 @@
+[0m[[0m[31merror[0m] [0m[0mC:\Users\DNurtailakov\Documents\VEON projects\smms1\src\main\scala\beemap\Agg_beemap.scala:152:53: illegal start of simple expression[0m
+[0m[[0m[31merror[0m] [0m[0m        ).orderBy($"ID_OBJECT",$"ID_SUBOBJECT_TYPE",)[0m
+[0m[[0m[31merror[0m] [0m[0m                                                    ^[0m
+[0m[[0m[31merror[0m] [0m[0mC:\Users\DNurtailakov\Documents\VEON projects\smms1\src\main\scala\beemap\Agg_beemap.scala:169:7: ')' expected but '}' found.[0m
+[0m[[0m[31merror[0m] [0m[0m      } catch {[0m
+[0m[[0m[31merror[0m] [0m[0m      ^[0m
+[0m[[0m[31merror[0m] [0m[0mtwo errors found[0m

@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="ivy-report.xsl"?>
+<ivy-report version="1.0">
+	<info
+		organisation="smms"
+		module="smms$sources"
+		revision="0.1"
+		conf="runtime"
+		confs="compile, runtime, test, provided, optional, compile-internal, runtime-internal, test-internal, plugin, pom, scala-tool"
+		date="20180521094243"/>
+	<dependencies>
+		<module organisation="javax.inject" name="javax.inject">
+			<revision name="1" status="release" pubdate="20091014053500" resolver="sbt-chain" artresolver="sbt-chain" homepage="http://code.google.com/p/atinject/" downloaded="false" searched="false" default="false" conf="compile, runtime(*), master(compile), runtime, compile(*), master" position="0">
+				<license name="The Apache Software License, Version 2.0" url="http://www.apache.org/licenses/LICENSE-2.0.txt"/>
+				<metadata-artifact status="no" details="" size="2536" time="0" location="C:\Users\DNurtailakov\.ivy2\cache\javax.inject\javax.inject\ivy-1.xml" searched="false" origin-is-local="false" origin-location="https://repo1.maven.org/maven2/javax/inject/javax.inject/1/javax.inject-1.pom"/>
+				<caller organisation="smms" name="smms$sources" conf="compile, runtime" rev="1" rev-constraint-default="1" rev-constraint-dynamic="1" callerrev="0.1"/>
+				<artifacts>
+					<artifact name="javax.inject" type="src" ext="jar" extra-classifier="sources" status="no" details="" size="10928" time="0" location="C:\Users\DNurtailakov\.ivy2\cache\javax.inject\javax.inject\srcs\javax.inject-1-sources.jar">
+						<origin-location is-local="false" location="https://repo1.maven.org/maven2/javax/inject/javax.inject/1/javax.inject-1-sources.jar"/>
+					</artifact>
+				</artifacts>
+			</revision>
+		</module>
+		<module organisation="org.apache.spark" name="spark-core_2.11">
+			<revision name="2.1.0" error="Resolution failed several times for dependency: org.apache.spark#spark-core_2.11;2.1.0 {compile=[default, compile, runtime(*), master(compile), runtime, default(compile), compile(*), master], runtime=[default, compile, runtime(*), master(compile), runtime, default(compile), compile(*), master], test=[default, compile, runtime(*), master(compile), runtime, default(compile), compile(*), master], compile-internal=[default, compile, runtime(*), master(compile), runtime, default(compile), compile(*), master], runtime-internal=[default, compile, runtime(*), master(compile), runtime, default(compile), compile(*), master], test-internal=[default, compile, runtime(*), master(compile), runtime, default(compile), compile(*), master]}:: 
+	public: unable to get resource for org/apache/spark#spark-core_2.11;2.1.0: res=https://repo1.maven.org/maven2/org/apache/spark/spark-core_2.11/2.1.0/spark-core_2.11-2.1.0.pom: java.net.ConnectException: Failed to connect to repo1.maven.org/151.101.84.209:443
+	bintray-sbt-plugins: unable to get resource for org.apache.spark#spark-core_2.11;2.1.0: res=http://dl.bintray.com/sbt/sbt-plugin-releases/org.apache.spark/spark-core_2.11/2.1.0/ivys/ivy.xml: java.net.ConnectException: Failed to connect to dl.bintray.com/108.168.243.150:80
+" downloaded="false" searched="false" conf="default, compile, runtime(*), master(compile), runtime, default(compile), compile(*), master" position="-1">
+				<caller organisation="smms" name="smms$sources" conf="compile, runtime" rev="2.1.0" rev-constraint-default="2.1.0" rev-constraint-dynamic="2.1.0" callerrev="0.1"/>
+				<artifacts>
+				</artifacts>
+			</revision>
+		</module>
+		<module organisation="org.apache.spark" name="spark-sql_2.11">
+			<revision name="2.1.0" error="Resolution failed several times for dependency: org.apache.spark#spark-sql_2.11;2.1.0 {compile=[default, compile, runtime, default(compile), master], runtime=[default, compile, runtime, default(compile), master], test=[default, compile, runtime, default(compile), master], compile-internal=[default, compile, runtime, default(compile), master], runtime-internal=[default, compile, runtime, default(compile), master], test-internal=[default, compile, runtime, default(compile), master]}:: 
+	public: unable to get resource for org/apache/spark#spark-sql_2.11;2.1.0: res=https://repo1.maven.org/maven2/org/apache/spark/spark-sql_2.11/2.1.0/spark-sql_2.11-2.1.0.pom: java.net.ConnectException: Failed to connect to repo1.maven.org/151.101.84.209:443
+	bintray-sbt-plugins: unable to get resource for org.apache.spark#spark-sql_2.11;2.1.0: res=http://dl.bintray.com/sbt/sbt-plugin-releases/org.apache.spark/spark-sql_2.11/2.1.0/ivys/ivy.xml: java.net.ConnectException: Failed to connect to dl.bintray.com/108.168.243.150:80
+" downloaded="false" searched="false" conf="default, compile, runtime, default(compile), master" position="-1">
+				<caller organisation="smms" name="smms$sources" conf="compile, runtime" rev="2.1.0" rev-constraint-default="2.1.0" rev-constraint-dynamic="2.1.0" callerrev="0.1"/>
+				<artifacts>
+				</artifacts>
+			</revision>
+		</module>
+		<module organisation="org.apache.spark" name="spark-network-shuffle_2.11">
+			<revision name="2.1.0" error="Resolution failed several times for dependency: org.apache.spark#spark-network-shuffle_2.11;2.1.0 {compile=[compile, runtime(*), master(compile), runtime, compile(*), master], runtime=[compile, runtime(*), master(compile), runtime, compile(*), master], test=[compile, runtime(*), master(compile), runtime, compile(*), master], compile-internal=[compile, runtime(*), master(compile), runtime, compile(*), master], runtime-internal=[compile, runtime(*), master(compile), runtime, compile(*), master], test-internal=[compile, runtime(*), master(compile), runtime, compile(*), master]}:: 
+	public: unable to get resource for org/apache/spark#spark-network-shuffle_2.11;2.1.0: res=https://repo1.maven.org/maven2/org/apache/spark/spark-network-shuffle_2.11/2.1.0/spark-network-shuffle_2.11-2.1.0.pom: java.net.ConnectException: Failed to connect to repo1.maven.org/151.101.84.209:443
+	bintray-sbt-plugins: unable to get resource for org.apache.spark#spark-network-shuffle_2.11;2.1.0: res=http://dl.bintray.com/sbt/sbt-plugin-releases/org.apache.spark/spark-network-shuffle_2.11/2.1.0/ivys/ivy.xml: java.net.ConnectException: Failed to connect to dl.bintray.com/108.168.243.150:80
+" downloaded="false" searched="false" conf="compile, runtime(*), master(compile), runtime, compile(*), master" position="-1">
+				<caller organisation="smms" name="smms$sources" conf="compile, runtime" rev="2.1.0" rev-constraint-default="2.1.0" rev-constraint-dynamic="2.1.0" callerrev="0.1"/>
+				<artifacts>
+				</artifacts>
+			</revision>
+		</module>
+		<module organisation="org.apache.spark" name="spark-catalyst_2.11">
+			<revision name="2.1.0" error="Resolution failed several times for dependency: org.apache.spark#spark-catalyst_2.11;2.1.0 {compile=[compile, runtime(*), master(compile), runtime, compile(*), master], runtime=[compile, runtime(*), master(compile), runtime, compile(*), master], test=[compile, runtime(*), master(compile), runtime, compile(*), master], compile-internal=[compile, runtime(*), master(compile), runtime, compile(*), master], runtime-internal=[compile, runtime(*), master(compile), runtime, compile(*), master], test-internal=[compile, runtime(*), master(compile), runtime, compile(*), master]}:: 
+	public: unable to get resource for org/apache/spark#spark-catalyst_2.11;2.1.0: res=https://repo1.maven.org/maven2/org/apache/spark/spark-catalyst_2.11/2.1.0/spark-catalyst_2.11-2.1.0.pom: java.net.ConnectException: Failed to connect to repo1.maven.org/151.101.84.209:443
+	bintray-sbt-plugins: unable to get resource for org.apache.spark#spark-catalyst_2.11;2.1.0: res=http://dl.bintray.com/sbt/sbt-plugin-releases/org.apache.spark/spark-catalyst_2.11/2.1.0/ivys/ivy.xml: java.net.ConnectException: Failed to connect to dl.bintray.com/108.168.243.150:80
+" downloaded="false" searched="false" conf="compile, runtime(*), master(compile), runtime, compile(*), master" position="-1">
+				<caller organisation="smms" name="smms$sources" conf="compile, runtime" rev="2.1.0" rev-constraint-default="2.1.0" rev-constraint-dynamic="2.1.0" callerrev="0.1"/>
+				<artifacts>
+				</artifacts>
+			</revision>
+		</module>
+		<module organisation="org.apache.spark" name="spark-network-common_2.11">
+			<revision name="2.1.0" error="Resolution failed several times for dependency: org.apache.spark#spark-network-common_2.11;2.1.0 {compile=[compile, runtime(*), master(compile), runtime, compile(*), master], runtime=[compile, runtime(*), master(compile), runtime, compile(*), master], test=[compile, runtime(*), master(compile), runtime, compile(*), master], compile-internal=[compile, runtime(*), master(compile), runtime, compile(*), master], runtime-internal=[compile, runtime(*), master(compile), runtime, compile(*), master], test-internal=[compile, runtime(*), master(compile), runtime, compile(*), master]}:: 
+	public: unable to get resource for org/apache/spark#spark-network-common_2.11;2.1.0: res=https://repo1.maven.org/maven2/org/apache/spark/spark-network-common_2.11/2.1.0/spark-network-common_2.11-2.1.0.pom: java.net.ConnectException: Failed to connect to repo1.maven.org/151.101.84.209:443
+	bintray-sbt-plugins: unable to get resource for org.apache.spark#spark-network-common_2.11;2.1.0: res=http://dl.bintray.com/sbt/sbt-plugin-releases/org.apache.spark/spark-network-common_2.11/2.1.0/ivys/ivy.xml: java.net.ConnectException: Failed to connect to dl.bintray.com/108.168.243.150:80
+" downloaded="false" searched="false" conf="compile, runtime(*), master(compile), runtime, compile(*), master" position="-1">
+				<caller organisation="smms" name="smms$sources" conf="compile, runtime" rev="2.1.0" rev-constraint-default="2.1.0" rev-constraint-dynamic="2.1.0" callerrev="0.1"/>
+				<artifacts>
+				</artifacts>
+			</revision>
+		</module>
+		<module organisation="org.apache.spark" name="spark-tags_2.11">
+			<revision name="2.1.0" error="Resolution failed several times for dependency: org.apache.spark#spark-tags_2.11;2.1.0 {compile=[compile, runtime(*), master(compile), runtime, compile(*), master], runtime=[compile, runtime(*), master(compile), runtime, compile(*), master], test=[compile, runtime(*), master(compile), runtime, compile(*), master], compile-internal=[compile, runtime(*), master(compile), runtime, compile(*), master], runtime-internal=[compile, runtime(*), master(compile), runtime, compile(*), master], test-internal=[compile, runtime(*), master(compile), runtime, compile(*), master]}:: 
+	public: unable to get resource for org/apache/spark#spark-tags_2.11;2.1.0: res=https://repo1.maven.org/maven2/org/apache/spark/spark-tags_2.11/2.1.0/spark-tags_2.11-2.1.0.pom: java.net.ConnectException: Failed to connect to repo1.maven.org/151.101.84.209:443
+	bintray-sbt-plugins: unable to get resource for org.apache.spark#spark-tags_2.11;2.1.0: res=http://dl.bintray.com/sbt/sbt-plugin-releases/org.apache.spark/spark-tags_2.11/2.1.0/ivys/ivy.xml: java.net.ConnectException: Failed to connect to dl.bintray.com/108.168.243.150:80
+" downloaded="false" searched="false" conf="compile, runtime(*), master(compile), runtime, compile(*), master" position="-1">
+				<caller organisation="smms" name="smms$sources" conf="compile, runtime" rev="2.1.0" rev-constraint-default="2.1.0" rev-constraint-dynamic="2.1.0" callerrev="0.1"/>
+				<artifacts>
+				</artifacts>
+			</revision>
+		</module>
+		<module organisation="org.apache.spark" name="spark-launcher_2.11">
+			<revision name="2.1.0" error="Resolution failed several times for dependency: org.apache.spark#spark-launcher_2.11;2.1.0 {compile=[compile, runtime(*), master(compile), runtime, compile(*), master], runtime=[compile, runtime(*), master(compile), runtime, compile(*), master], test=[compile, runtime(*), master(compile), runtime, compile(*), master], compile-internal=[compile, runtime(*), master(compile), runtime, compile(*), master], runtime-internal=[compile, runtime(*), master(compile), runtime, compile(*), master], test-internal=[compile, runtime(*), master(compile), runtime, compile(*), master]}:: 
+	public: unable to get resource for org/apache/spark#spark-launcher_2.11;2.1.0: res=https://repo1.maven.org/maven2/org/apache/spark/spark-launcher_2.11/2.1.0/spark-launcher_2.11-2.1.0.pom: java.net.ConnectException: Failed to connect to repo1.maven.org/151.101.84.209:443
+	bintray-sbt-plugins: unable to get resource for org.apache.spark#spark-launcher_2.11;2.1.0: res=http://dl.bintray.com/sbt/sbt-plugin-releases/org.apache.spark/spark-launcher_2.11/2.1.0/ivys/ivy.xml: java.net.ConnectException: Failed to connect to dl.bintray.com/108.168.243.150:80
+" downloaded="false" searched="false" conf="compile, runtime(*), master(compile), runtime, compile(*), master" position="-1">
+				<caller organisation="smms" name="smms$sources" conf="compile, runtime" rev="2.1.0" rev-constraint-default="2.1.0" rev-constraint-dynamic="2.1.0" callerrev="0.1"/>
+				<artifacts>
+				</artifacts>
+			</revision>
+		</module>
+		<module organisation="org.apache.spark" name="spark-unsafe_2.11">
+			<revision name="2.1.0" error="Resolution failed several times for dependency: org.apache.spark#spark-unsafe_2.11;2.1.0 {compile=[compile, runtime(*), master(compile), runtime, compile(*), master], runtime=[compile, runtime(*), master(compile), runtime, compile(*), master], test=[compile, runtime(*), master(compile), runtime, compile(*), master], compile-internal=[compile, runtime(*), master(compile), runtime, compile(*), master], runtime-internal=[compile, runtime(*), master(compile), runtime, compile(*), master], test-internal=[compile, runtime(*), master(compile), runtime, compile(*), master]}:: 
+	public: unable to get resource for org/apache/spark#spark-unsafe_2.11;2.1.0: res=https://repo1.maven.org/maven2/org/apache/spark/spark-unsafe_2.11/2.1.0/spark-unsafe_2.11-2.1.0.pom: java.net.ConnectException: Failed to connect to repo1.maven.org/151.101.84.209:443
+	bintray-sbt-plugins: unable to get resource for org.apache.spark#spark-unsafe_2.11;2.1.0: res=http://dl.bintray.com/sbt/sbt-plugin-releases/org.apache.spark/spark-unsafe_2.11/2.1.0/ivys/ivy.xml: java.net.ConnectException: Failed to connect to dl.bintray.com/108.168.243.150:80
+" downloaded="false" searched="false" conf="compile, runtime(*), master(compile), runtime, compile(*), master" position="-1">
+				<caller organisation="smms" name="smms$sources" conf="compile, runtime" rev="2.1.0" rev-constraint-default="2.1.0" rev-constraint-dynamic="2.1.0" callerrev="0.1"/>
+				<artifacts>
+				</artifacts>
+			</revision>
+		</module>
+		<module organisation="org.apache.spark" name="spark-sketch_2.11">
+			<revision name="2.1.0" error="Resolution failed several times for dependency: org.apache.spark#spark-sketch_2.11;2.1.0 {compile=[compile, runtime(*), master(compile), runtime, compile(*), master], runtime=[compile, runtime(*), master(compile), runtime, compile(*), master], test=[compile, runtime(*), master(compile), runtime, compile(*), master], compile-internal=[compile, runtime(*), master(compile), runtime, compile(*), master], runtime-internal=[compile, runtime(*), master(compile), runtime, compile(*), master], test-internal=[compile, runtime(*), master(compile), runtime, compile(*), master]}:: 
+	public: unable to get resource for org/apache/spark#spark-sketch_2.11;2.1.0: res=https://repo1.maven.org/maven2/org/apache/spark/spark-sketch_2.11/2.1.0/spark-sketch_2.11-2.1.0.pom: java.net.ConnectException: Failed to connect to repo1.maven.org/151.101.84.209:443
+	bintray-sbt-plugins: unable to get resource for org.apache.spark#spark-sketch_2.11;2.1.0: res=http://dl.bintray.com/sbt/sbt-plugin-releases/org.apache.spark/spark-sketch_2.11/2.1.0/ivys/ivy.xml: java.net.ConnectException: Failed to connect to dl.bintray.com/108.168.243.150:80
+" downloaded="false" searched="false" conf="compile, runtime(*), master(compile), runtime, compile(*), master" position="-1">
+				<caller organisation="smms" name="smms$sources" conf="compile, runtime" rev="2.1.0" rev-constraint-default="2.1.0" rev-constraint-dynamic="2.1.0" callerrev="0.1"/>
+				<artifacts>
+				</artifacts>
+			</revision>
+		</module>
+	</dependencies>
+</ivy-report>

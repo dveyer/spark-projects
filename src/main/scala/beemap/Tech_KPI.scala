@@ -18,6 +18,8 @@ class Tech_KPI(propMap: Map[String, String], sparkMap: Map[String, String], pdat
   val outroams_path = propMap("outroams_path")
   val map_kpi_path = propMap("map_kpi_path")
   val kpi_stat_path = propMap("kpi_stat_path")
+  val kpi_final_cell_path = propMap("kpi_final_cell_path")
+  val kpi_final_site_path = propMap("kpi_final_site_path")
 
   val calc_date = propMap("calc_date")
   val P_DATE = if (pdate.equals("sysdate")) tools.getSysDate("yyyy-MM-dd") else pdate
@@ -299,15 +301,54 @@ from (
 
         spark.read.parquet("/dmp/beemap/temp/dim_map_cell/"+tools.patternToDate(calc_date,"yyyyMM")).createOrReplaceTempView("dim_map_cell")
 
-        val kpi_kcell = spark.read.parquet("/dmp/beemap/temp/kpi_kcell/"+tools.patternToDate(calc_date,"yyyyMM")).createOrReplaceTempView("kpi_kcell")
-        val kpi_kcell_final = spark.sql("""
+        val kpi_kcell = spark.read.format("csv").option("header","true").option("delimiter",";").load("/dmp/beemap/temp/kcell_data/"+tools.patternToDate(calc_date,"yyyyMM")+"*_kpis.csv")
+        val counters_kcell = spark.read.format("csv").option("header","true").option("delimiter",";").load("/dmp/beemap/temp/kcell_data/"+tools.patternToDate(calc_date,"yyyyMM")+"*_counters.csv")
+
+        kpi_kcell.createOrReplaceTempView("kpi_kcell")
+        counters_kcell.createOrReplaceTempView("counters_kcell")
+        val kpi_kcell_1 = spark.sql("""
     select
+        site_name,
+        cell_fdd cell_name,
+        sum((TRAFFIC_DL_MBYTE + TRAFFIC_UL_MBYTE) * PRB_UTIL) / sum(TRAFFIC_DL_MBYTE + TRAFFIC_UL_MBYTE) util_prb_dl_4g,
+        sum((TRAFFIC_DL_MBYTE + TRAFFIC_UL_MBYTE) * E_RAB_DR) / sum(TRAFFIC_DL_MBYTE + TRAFFIC_UL_MBYTE) RAB_DR_4G,
+        sum((TRAFFIC_DL_MBYTE + TRAFFIC_UL_MBYTE) * LTE_USER_THROUGHPUT_DL) / sum(TRAFFIC_DL_MBYTE + TRAFFIC_UL_MBYTE) User_Throughput_4G
+    from kpi_kcell
+    group by site_name, cell_fdd
+""")
+
+        val kpi_kcell_2 = spark.sql("""
+    select
+        site_name,
+        cell_fdd cell_name,
+        100 * (1 - (sum(pmRrcConnEstabSucc)/(sum(pmRrcConnEstabAtt) - sum(pmRrcConnEstabAttReatt))) * (sum(pmS1SigConnEstabSucc)/sum(pmS1SigConnEstabAtt)) * (sum(pmErabEstabSuccInit)/sum(pmErabEstabAttInit))) CunSSR_PS_4G
+    from
+    counters_kcell
+    group by site_name, cell_fdd
+""")
+
+        val kpi_kcell_f =
+          kpi_kcell_1.
+            join(kpi_kcell_2, Seq("site_name", "cell_name"), "full").
+            select(
+              $"site_name",
+              $"cell_name",
+              $"util_prb_dl_4g",
+              $"RAB_DR_4G",
+              $"User_Throughput_4G",
+              $"CunSSR_PS_4G"
+            )
+
+        kpi_kcell_f.write.mode("overwrite").parquet("/dmp/beemap/temp/kpi_kcell/"+tools.patternToDate(calc_date,"yyyyMM"))
+        kpi_kcell_f.createOrReplaceTempView("kpi_kcell")
+        val kpi_kcell_final = spark.sql("""
+        select
         k.util_prb_dl_4g,
         k.RAB_DR_4G,
         k.User_Throughput_4G,
         k.CunSSR_PS_4G,
         d.*
-    from (
+        from (
         select
             k.site_name,
             k.cell_name,
@@ -410,11 +451,33 @@ from (
         location,
         location_type
     from kpi_kcell_final k
-""")
+    """)
 
-        kpi_final.write.mode("overwrite").parquet("/dmp/beemap/temp/kpi_final/"+tools.patternToDate(calc_date,"yyyyMM"))
+        kpi_final.createOrReplaceTempView("kpi_final")
+        kpi_final.write.mode("overwrite").parquet(kpi_final_cell_path + tools.patternToDate(calc_date,"yyyyMM"))
 
-    spark.close()
+        spark.sql("""
+        select
+        k.site_id,
+        max(k.cdr_cs_2g) CDR_2G,
+        max(k.CunSSR_CS_2G) CunSSR_2G,
+        max(k.cunssr_cs_3g) CunSSR_CS_3G,
+        max(k.CDR_CS_3G) CDR_CS_3G,
+        max(k.CunSSR_PS_3G) CunSSR_PS_3G,
+        max(k.rab_dr_ps_3g) rab_dr_ps_3g,
+        min(k.User_Throughput_3G) Throughput_3G,
+        max(k.CONG_CODE_3G) CONG_CODE_3G,
+        max(k.CONG_CE_UL_DL_3G) CONG_CE_UL_DL_3G,
+        max(k.cong_power_ul_dl_3g) cong_power_ul_dl_3g,
+        max(k.RAB_DR_4G) RAB_DR_PS_4G,
+        max(k.CunSSR_PS_4G) CunSSR_PS_4G,
+        min(k.User_Throughput_4G) Throughput_4G,
+        max(k.util_prb_dl_4g) util_prb_dl_4g
+          from kpi_final k
+        group by k.site_id
+        """).write.mode("overwrite").parquet(kpi_final_site_path + tools.patternToDate(calc_date,"yyyyMM"))
+
+        spark.close()
       } catch {
         case e: Exception => println (s"ERROR: $e")
           status = false

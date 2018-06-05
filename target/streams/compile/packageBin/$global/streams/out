@@ -4,6 +4,8 @@
 [0m[[0m[0mdebug[0m] [0m[0m	  C:\Users\DNurtailakov\Documents\VEON projects\smms1\target\scala-2.11\classes\smms[0m
 [0m[[0m[0mdebug[0m] [0m[0m	utl\Tools$$typecreator1$1.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	  C:\Users\DNurtailakov\Documents\VEON projects\smms1\target\scala-2.11\classes\utl\Tools$$typecreator1$1.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	beemap\Recharges.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  C:\Users\DNurtailakov\Documents\VEON projects\smms1\target\scala-2.11\classes\beemap\Recharges.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	StgInit.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	  C:\Users\DNurtailakov\Documents\VEON projects\smms1\target\scala-2.11\classes\StgInit.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	utl\Tools$$anonfun$initNotification$1.class[0m
@@ -68,4 +70,3 @@
 [0m[[0m[0mdebug[0m] [0m[0m	  C:\Users\DNurtailakov\Documents\VEON projects\smms1\target\scala-2.11\classes\MainApp$.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	beemap\Tech_KPI.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	  C:\Users\DNurtailakov\Documents\VEON projects\smms1\target\scala-2.11\classes\beemap\Tech_KPI.class[0m
-[0m[[0m[0minfo[0m] [0m[0mDone packaging.[0m

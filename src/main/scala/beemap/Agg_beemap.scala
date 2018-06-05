@@ -30,42 +30,30 @@ class Agg_beemap(propMap: Map[String, String], sparkMap: Map[String, String], pd
     if (spark != null)
       try {
 
-        val co = spark.read.parquet("/dmp/beemap/temp/csv/counters/" + tools.patternToDate(calc_date, "yyyyMM"))
-        //val co = spark.read.parquet("/dmp/beemap/temp/kpi_final/" + tools.patternToDate(calc_date, "yyyyMM"))
+        //val co = spark.read.parquet("/dmp/beemap/temp/csv/counters/" + tools.patternToDate(calc_date, "yyyyMM"))
+        val co = spark.read.parquet("/dmp/beemap/temp/kpi_final_site/" + tools.patternToDate(calc_date, "yyyyMM"))
         val loc = spark.read.parquet("/dmp/beemap/temp/hw_location/" + tools.patternToDate(calc_date, "yyyyMM"))
         val stat = spark.read.parquet("/dmp/beemap/temp/kpi_stations/" + tools.patternToDate(calc_date, "yyyyMM"))
         val sg = spark.read.parquet("/dmp/beemap/temp/site_geo/" + tools.patternToDate(calc_date, "yyyyMM"))
 
-        val t1 = stat.join(loc, stat("site_id") === loc("site_id"))
-          .join(co, stat("site_id") === co("site_id"))
+        val t1 = stat.join(loc, stat("site_id") === loc("site_id"),"full")
+          .join(co, stat("site_id") === co("site_id"),"full")
           .select(
-            co("cell_name"),
-            co("enodeb_id"),
-            co("enodeb_name"),
-            co("cdr_cs_2g"),
-            co("CunSSR_CS_2G"),
+            when(co("site_id").isNull,stat("site_id")).otherwise(co("site_id")).as("site_id"),
+            co("CDR_2G"),
+            co("CunSSR_2G"),
             co("CDR_CS_3G"),
             co("rab_dr_ps_3g"),
-            co("cunssr_cs_3g"),
+            co("CunSSR_CS_3G"),
             co("CunSSR_PS_3G"),
-            co("User_Throughput_3G"),
+            co("Throughput_3G"),
             co("cong_power_ul_dl_3g"),
             co("CONG_CE_UL_DL_3G"),
             co("CONG_CODE_3G"),
             co("CunSSR_PS_4G"),
             co("util_prb_dl_4g"),
-            co("RAB_DR_4G"),
-            co("User_Throughput_4G"),
-            co("site_id"),
-            co("lac"),
-            co("cell"),
-            co("type"),
-            co("cell_owner_id"),
-            co("site_name"),
-            co("region"),
-            co("district"),
-            co("location"),
-            co("location_type"),
+            co("RAB_DR_PS_4G"),
+            co("Throughput_4G"),
             loc("work_count"),
             loc("home_count"),
             stat("VOICE_IN_B_L"),
@@ -100,9 +88,9 @@ class Agg_beemap(propMap: Map[String, String], sparkMap: Map[String, String], pd
             stat("MBOU")
           ).cache()
 
-        t1.join(sg, t1("site_id") === sg("site_id"))
+        t1.join(sg, t1("site_id") === sg("site_id"),"full")
           .groupBy(lit(calc_date).as("TIME_KEY"),
-            sg("ID_OBJECT"),
+            when(sg("ID_OBJECT").isNull,t1("site_id")).otherwise(sg("ID_OBJECT")).as("ID_OBJECT"),
             sg("ID_SUBOBJECT_TYPE"))
           .agg(
             lit(calc_date.substring(0,4)).as("YEAR"),
@@ -111,20 +99,20 @@ class Agg_beemap(propMap: Map[String, String], sparkMap: Map[String, String], pd
             lit(0).as("HOUR"),
             lit(0).as("MINUTE"),
             lit(1).as("ID_TIME_MODE"),
-          avg(t1("cdr_cs_2g")).as("CDR_2G"),
-          avg(t1("CunSSR_CS_2G")).as("CunSSR_2G"),
-          avg(t1("CDR_CS_3G")).as("CDR_CS_3G"),
-          avg(t1("rab_dr_ps_3g")).as("RAB_DR_PS_3G"),
-          avg(t1("cunssr_cs_3g")).as("CunSSR_CS_3G"),
-          avg(t1("CunSSR_PS_3G")).as("CunSSR_PS_3G"),
-          avg(t1("User_Throughput_3G")).as("Throughput_3G"),
-          avg(t1("cong_power_ul_dl_3g")).as("CONG_POWER_UL_DL_3G"),
-          avg(co("CONG_CE_UL_DL_3G")).as("CONG_CE_UL_DL_3G"),
-          avg(co("CONG_CODE_3G")).as("CONG_CODE_3G"),
-          avg(t1("CunSSR_PS_4G")).as("CunSSR_PS_4G"),
-          avg(t1("util_prb_dl_4g")).as("Util_PRB_DL_4G"),
-          avg(t1("RAB_DR_4G")).as("RAB_DR_PS_4G"),
-          avg(t1("User_Throughput_4G")).as("Throughput_4G"),
+            avg("CDR_2G").as("CDR_2G"),
+            avg("CunSSR_2G").as("CunSSR_2G"),
+            avg("CDR_CS_3G").as("CDR_CS_3G"),
+            avg("RAB_DR_PS_3G").as("RAB_DR_PS_3G"),
+            avg("CunSSR_CS_3G").as("CunSSR_CS_3G"),
+            avg("CunSSR_PS_3G").as("CunSSR_PS_3G"),
+            avg("Throughput_3G").as("Throughput_3G"),
+            avg("CONG_POWER_UL_DL_3G").as("CONG_POWER_UL_DL_3G"),
+            avg("CONG_CE_UL_DL_3G").as("CONG_CE_UL_DL_3G"),
+            avg("CONG_CODE_3G").as("CONG_CODE_3G"),
+            avg("CunSSR_PS_4G").as("CunSSR_PS_4G"),
+            avg("Util_PRB_DL_4G").as("Util_PRB_DL_4G"),
+            avg("RAB_DR_PS_4G").as("RAB_DR_PS_4G"),
+            avg("Throughput_4G").as("Throughput_4G"),
 
           sum(t1("WORK_COUNT")).as("WORK_CTN_COUNT"),
           sum(t1("HOME_COUNT")).as("HOME_CTN_COUNT"),
@@ -163,15 +151,15 @@ class Agg_beemap(propMap: Map[String, String], sparkMap: Map[String, String], pd
             .parquet("/dmp/beemap/temp/agg_beemap/" + tools.patternToDate(calc_date, "yyyyMM"))
 
         // Write to MySQL
-         val prop = new java.util.Properties
+         /*val prop = new java.util.Properties
          prop.setProperty("driver", "com.mysql.jdbc.Driver")
          prop.setProperty("user", "DDosmukhamedov")
          prop.setProperty("password", "HP1nvent")
 
          val url = "jdbc:mysql://kz-dmpignt05:3306/kpi"
 
-           spark.read.parquet("/dmp/beemap/temp/agg_beemap/" + tools.patternToDate(calc_date, "yyyyMM"))
-             .write.mode("append").jdbc(url,"kpi_stations",prop)
+        spark.read.parquet("/dmp/beemap/temp/agg_beemap/" + tools.patternToDate(calc_date, "yyyyMM"))
+        .write.mode("append").jdbc(url,"kpi_stations",prop)*/
 
         spark.close()
 
